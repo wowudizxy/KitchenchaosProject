@@ -9,11 +9,15 @@ public class Player : MonoBehaviour
     [SerializeField]private float rotateSpeed = 10f;
     [SerializeField]private GameInput gameInput;
     private bool isWalking = false;
-    
+    private Vector3 direction = Vector3.zero;
     void Update()
     {
-        Vector3 direction = gameInput.GetMoveDircetionNormalized();    
-        isWalking = direction!=Vector3.zero;
+         direction= gameInput.GetMoveDircetionNormalized();    
+         isWalking = direction!=Vector3.zero;
+        
+    }
+    void FixedUpdate() {
+        
         transform.position += direction*Time.deltaTime*moveSpeed;
         if(direction!=Vector3.zero)
         {
