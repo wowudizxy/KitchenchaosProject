@@ -8,21 +8,24 @@ public class Player : MonoBehaviour
     [SerializeField]private float moveSpeed = 10f;
     [SerializeField]private float rotateSpeed = 10f;
     [SerializeField]private GameInput gameInput;
+    [SerializeField]private LayerMask counterLayerMask;
     private bool isWalking = false;
-    private Vector3 direction = Vector3.zero;
+    
+    private void Start ()
+    {
+        gameInput.OnInteractAction += GameInput_OnInteractAction;
+    }
     void Update()
     {
-         direction= gameInput.GetMoveDircetionNormalized();    
-         isWalking = direction!=Vector3.zero;
         
     }
     void FixedUpdate() {
+        HandleMovement();
         
-        transform.position += direction*Time.deltaTime*moveSpeed;
-        if(direction!=Vector3.zero)
-        {
-            transform.forward = Vector3.Slerp(transform.forward, direction, Time.deltaTime*rotateSpeed);
-        }
+    }
+    private void GameInput_OnInteractAction (object sender, System.EventArgs e)
+    {
+        HandleInterection();
     }
     public bool Iswalking
     {
@@ -31,5 +34,22 @@ public class Player : MonoBehaviour
             return isWalking;
         }
     }
-    
+    private void HandleMovement()
+    {
+        Vector3 direction = gameInput.GetMoveDircetionNormalized();
+        isWalking = direction != Vector3.zero;
+        transform.position += direction*Time.deltaTime*moveSpeed;
+        if(direction!=Vector3.zero)
+        {
+            transform.forward = Vector3.Slerp(transform.forward, direction, Time.deltaTime*rotateSpeed);
+        }
+    }
+    private void HandleInterection()
+    {
+        if(Physics.Raycast(transform.position, transform.forward, out RaycastHit hit,1f,counterLayerMask)){
+            if(hit.transform.TryGetComponent<ClearCounter>(out ClearCounter clearCounter)){
+                clearCounter.Interect();
+            }
+        }
+    }
 }
