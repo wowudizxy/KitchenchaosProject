@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : KitchenObjectHolder
 {
     [SerializeField]private float moveSpeed = 10f;
     [SerializeField]private float rotateSpeed = 10f;

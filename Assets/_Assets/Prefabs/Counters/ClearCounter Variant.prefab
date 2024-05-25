@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7146651001413063674}
   m_Layer: 6
-  m_Name: TopPoint
+  m_Name: HoldPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -213,10 +213,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 826c3c329e0cd24479f1f75ac8d5f5a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  holdPoint: {fileID: 7146651001413063674}
   selectedCounter: {fileID: 4800656861823829771}
-  kitchenObject: {fileID: 7255161851382405404, guid: 4e267c1488aae774b9a5004f45574a46,
-    type: 3}
-  topPoint: {fileID: 7146651001413063674}
+  kitchenObjectSO: {fileID: 0}
+  targetCounter: {fileID: 0}
 --- !u!1001 &9020332907392164769
 PrefabInstance:
   m_ObjectHideFlags: 0
