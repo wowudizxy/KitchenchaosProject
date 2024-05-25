@@ -1070,7 +1070,7 @@ PrefabInstance:
     - target: {fileID: 252291371404835194, guid: 4278660317442324d8fdbce2004a0429,
         type: 3}
       propertyPath: m_Name
-      value: ContainerTomatoCounter
+      value: ContainerCounter_Tomato
       objectReference: {fileID: 0}
     - target: {fileID: 929750440285059697, guid: 4278660317442324d8fdbce2004a0429,
         type: 3}

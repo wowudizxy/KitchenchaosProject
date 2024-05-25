@@ -5,25 +5,37 @@ using UnityEngine;
 
 public class ClearCounter : BaseCounter
 {
-    
-    
-    
-    // [SerializeField]private ClearCounter targetCounter;
+    public override void Interact(Player player)
+    {
+        if (player.IsHaveKitchenObject())
+        {
+            if (IsHaveKitchenObject()==false)
+            {
+                TransferKitchenObject(player, this);
+            }
+            else
+            {
 
-    
-    // private void Update() {
-    //     if(Input.GetKeyDown(KeyCode.F)){
-    //         print("F");
-    //         TransferKitchenObject(this,targetCounter);
-    //     }
-    // }
-    public override void Interact(Player player){
-        
-        
+            }
+
+        }
+        else
+        {//玩家没有食材
+            if (IsHaveKitchenObject())
+            {
+                TransferKitchenObject(this, player);
+            }
+            else
+            {
+                
+            }
+        }
+
+
 
     }
-    
-   
-    
+
+
+
 
 }
