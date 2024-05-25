@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c8a4012c32b63e4fb20a32cb05ea4eb, type: 3}
   m_Name: Bread
   m_EditorClassIdentifier: 
-  kitchenObject: {fileID: 0}
-  sprite: {fileID: 0}
-  KitchenObjectName: 
+  kitchenObject: {fileID: 7255161851382405404, guid: 4e267c1488aae774b9a5004f45574a46,
+    type: 3}
+  sprite: {fileID: 21300000, guid: 77b28124b8bda494381c80bd5aa42c22, type: 3}
+  KitchenObjectName: "\u9762\u5305"
