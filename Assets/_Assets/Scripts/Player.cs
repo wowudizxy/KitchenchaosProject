@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
     }
     private void GameInput_OnInteractAction (object sender, System.EventArgs e)
     {
-        selectedCounter.Interect();
+        selectedCounter?.Interect();
     }
     public bool Iswalking
     {
