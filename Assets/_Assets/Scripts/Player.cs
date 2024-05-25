@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
     [SerializeField]private float rotateSpeed = 10f;
     [SerializeField]private GameInput gameInput;
     [SerializeField]private LayerMask counterLayerMask;
+
+    private ClearCounter selectedCounter;
     private bool isWalking = false;
     
     private void Start ()
@@ -17,15 +19,14 @@ public class Player : MonoBehaviour
     }
     void Update()
     {
-        
+        HandleInterection();
     }
     void FixedUpdate() {
         HandleMovement();
-        
     }
     private void GameInput_OnInteractAction (object sender, System.EventArgs e)
     {
-        HandleInterection();
+        selectedCounter.Interect();
     }
     public bool Iswalking
     {
@@ -48,8 +49,20 @@ public class Player : MonoBehaviour
     {
         if(Physics.Raycast(transform.position, transform.forward, out RaycastHit hit,1f,counterLayerMask)){
             if(hit.transform.TryGetComponent<ClearCounter>(out ClearCounter clearCounter)){
-                clearCounter.Interect();
+                SetSelectedCounter(clearCounter);
+            }else{
+                SetSelectedCounter(null);
             }
+        }else{
+            SetSelectedCounter(null);
+        }
+    }
+    private void SetSelectedCounter(ClearCounter clearCounter)
+    {
+        if(clearCounter!=selectedCounter){
+            selectedCounter?.UnSelectedCounter();
+            clearCounter?.SelectedCounter();
+            selectedCounter = clearCounter;
         }
     }
 }
