@@ -11,7 +11,7 @@ public class Player : KitchenObjectHolder
     [SerializeField]private GameInput gameInput;
     [SerializeField]private LayerMask counterLayerMask;
 
-    private ClearCounter selectedCounter;
+    private BaseCounter selectedCounter;
     private bool isWalking = false;
     private void Awake() {
         Instance = this;
@@ -29,7 +29,7 @@ public class Player : KitchenObjectHolder
     }
     private void GameInput_OnInteractAction (object sender, System.EventArgs e)
     {
-        selectedCounter?.Interact();
+        selectedCounter?.Interact(this);
     }
     public bool Iswalking
     {
@@ -51,7 +51,7 @@ public class Player : KitchenObjectHolder
     private void HandleInterection()
     {
         if(Physics.Raycast(transform.position, transform.forward, out RaycastHit hit,1f,counterLayerMask)){
-            if(hit.transform.TryGetComponent<ClearCounter>(out ClearCounter clearCounter)){
+            if(hit.transform.TryGetComponent<BaseCounter>(out BaseCounter clearCounter)){
                 SetSelectedCounter(clearCounter);
             }else{
                 SetSelectedCounter(null);
@@ -60,7 +60,7 @@ public class Player : KitchenObjectHolder
             SetSelectedCounter(null);
         }
     }
-    private void SetSelectedCounter(ClearCounter clearCounter)
+    private void SetSelectedCounter(BaseCounter clearCounter)
     {
         if(clearCounter!=selectedCounter){
             selectedCounter?.UnSelectedCounter();

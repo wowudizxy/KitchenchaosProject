@@ -3,38 +3,33 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class ClearCounter : KitchenObjectHolder
+public class ClearCounter : BaseCounter
 {
-    [SerializeField]private GameObject selectedCounter;
+    
     [SerializeField]private KitchenObjectSO kitchenObjectSO;
     
-    [SerializeField]private ClearCounter targetCounter;
+    // [SerializeField]private ClearCounter targetCounter;
 
     
-    private void Update() {
-        if(Input.GetKeyDown(KeyCode.F)){
-            print("F");
-            TransferKitchenObject(this,targetCounter);
-        }
-    }
-    public void Interact(){
+    // private void Update() {
+    //     if(Input.GetKeyDown(KeyCode.F)){
+    //         print("F");
+    //         TransferKitchenObject(this,targetCounter);
+    //     }
+    // }
+    public override void Interact(Player player){
         if(GetKitchenObject()== null){
             KitchenObject kitchenObject = Instantiate(kitchenObjectSO.kitchenObject,GetHoldPoint().position,GetHoldPoint().rotation,GetHoldPoint())
             .GetComponent<KitchenObject>();
             SetKitchenObject(kitchenObject);
         }else{
-            TransferKitchenObject(this,Player.Instance);
+            TransferKitchenObject(this,player);
         }
         
 
     }
     
-    public void SelectedCounter(){
-        selectedCounter.SetActive(true);
-    }
-    public void UnSelectedCounter(){
-        selectedCounter.SetActive(false);
-    }
+   
     
 
 }
