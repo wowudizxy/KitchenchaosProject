@@ -7,12 +7,13 @@ public class ContainerCounter : BaseCounter
     [SerializeField]private KitchenObjectSO kitchenObjectSO;
     public override void Interact(Player player)
     {
-        if(GetKitchenObject()== null){
-            KitchenObject kitchenObject = Instantiate(kitchenObjectSO.kitchenObject,GetHoldPoint().position,GetHoldPoint().rotation,GetHoldPoint())
-            .GetComponent<KitchenObject>();
-            SetKitchenObject(kitchenObject);
-        }else{
-            TransferKitchenObject(this,player);
-        }
+        if(player.IsHaveKitchenObject()) return;
+        CreateKitchenObject(kitchenObjectSO.kitchenObject);
+        TransferKitchenObject(this,player);
+    }
+    void CreateKitchenObject(GameObject KitchenObject){
+        KitchenObject kitchenObject = Instantiate(KitchenObject,GetHoldPoint().position,GetHoldPoint().rotation,GetHoldPoint())
+        .GetComponent<KitchenObject>();
+        SetKitchenObject(kitchenObject);
     }
 }

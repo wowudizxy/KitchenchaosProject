@@ -15,6 +15,9 @@ public class KitchenObjectHolder : MonoBehaviour
     public Transform GetHoldPoint(){
         return holdPoint;
     }
+    public bool IsHaveKitchenObject(){
+        return kitchenObject!=null;
+    }
     
     public void TransferKitchenObject(KitchenObjectHolder sourceHolder,KitchenObjectHolder targetHolder){
         if(sourceHolder.GetKitchenObject() == null){
