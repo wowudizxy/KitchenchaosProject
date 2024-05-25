@@ -21,7 +21,7 @@ PrefabInstance:
     - target: {fileID: 2756495174685006585, guid: abbef0ee8062f8643920fa19fecf2c1e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2756495174685006585, guid: abbef0ee8062f8643920fa19fecf2c1e,
         type: 3}
@@ -61,7 +61,7 @@ PrefabInstance:
     - target: {fileID: 2965193137827518962, guid: abbef0ee8062f8643920fa19fecf2c1e,
         type: 3}
       propertyPath: m_Name
-      value: ContainerTomatoCounter Variant
+      value: ContainerCounter_Tomato
       objectReference: {fileID: 0}
     - target: {fileID: 4942988716578359252, guid: abbef0ee8062f8643920fa19fecf2c1e,
         type: 3}
