@@ -6,10 +6,10 @@ using UnityEngine;
 public class ClearCounter : MonoBehaviour
 {
     [SerializeField]private GameObject selectedCounter;
-    [SerializeField]private GameObject kitchenObject;
+    [SerializeField]private KitchenObjectSO kitchenObjectSO;
     [SerializeField]private Transform topPoint;
     public void Interect(){
-        GameObject go = GameObject.Instantiate(kitchenObject, topPoint.position, topPoint.rotation);
+        GameObject go = GameObject.Instantiate(kitchenObjectSO.kitchenObject, topPoint.position, topPoint.rotation);
         go.transform.SetParent(topPoint);
     }
     public void SelectedCounter(){
