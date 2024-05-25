@@ -23,7 +23,7 @@ public class ClearCounter : KitchenObjectHolder
             .GetComponent<KitchenObject>();
             SetKitchenObject(kitchenObject);
         }else{
-            Debug.LogWarning(gameObject+"有食材");
+            TransferKitchenObject(this,Player.Instance);
         }
         
 

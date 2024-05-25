@@ -16,17 +16,17 @@ public class KitchenObjectHolder : MonoBehaviour
         return holdPoint;
     }
     
-    public void TransferKitchenObject(ClearCounter sourceCounter,ClearCounter targetCounter){
-        if(sourceCounter.GetKitchenObject() == null){
-            Debug.LogWarning("原始柜台是空的,无法转移食材");
+    public void TransferKitchenObject(KitchenObjectHolder sourceHolder,KitchenObjectHolder targetHolder){
+        if(sourceHolder.GetKitchenObject() == null){
+            Debug.LogWarning("原始持有者是空的,无法转移食材");
             return;
         }
-        if(targetCounter.GetKitchenObject() != null){
-            Debug.LogWarning("目标柜台上有食材,无法转移食材");
+        if(targetHolder.GetKitchenObject() != null){
+            Debug.LogWarning("目标持有者有食材,无法转移食材");
             return;
         }
-        targetCounter.AddKitchenObject(sourceCounter.GetKitchenObject());
-        sourceCounter.ClearKitchenObject();
+        targetHolder.AddKitchenObject(sourceHolder.GetKitchenObject());
+        sourceHolder.ClearKitchenObject();
     }
     public void ClearKitchenObject(){
         this.kitchenObject = null;

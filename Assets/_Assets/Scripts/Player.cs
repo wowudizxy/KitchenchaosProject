@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Player : KitchenObjectHolder
 {
+    public static Player Instance{get;private set;}
     [SerializeField]private float moveSpeed = 10f;
     [SerializeField]private float rotateSpeed = 10f;
     [SerializeField]private GameInput gameInput;
@@ -12,7 +13,9 @@ public class Player : KitchenObjectHolder
 
     private ClearCounter selectedCounter;
     private bool isWalking = false;
-    
+    private void Awake() {
+        Instance = this;
+    }    
     private void Start ()
     {
         gameInput.OnInteractAction += GameInput_OnInteractAction;
