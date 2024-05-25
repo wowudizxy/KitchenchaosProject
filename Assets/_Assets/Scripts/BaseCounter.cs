@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BaseCounter : KitchenObjectHolder
 {
+    
     [SerializeField]private GameObject selectedCounter;
     public virtual void Interact(Player player){
 
