@@ -13,9 +13,5 @@ public class ContainerCounter : BaseCounter
         CreateKitchenObject(kitchenObjectSO.kitchenObject);
         TransferKitchenObject(this,player);
     }
-    void CreateKitchenObject(GameObject KitchenObject){
-        KitchenObject kitchenObject = Instantiate(KitchenObject,GetHoldPoint().position,GetHoldPoint().rotation,GetHoldPoint())
-        .GetComponent<KitchenObject>();
-        SetKitchenObject(kitchenObject);
-    }
+    
 }

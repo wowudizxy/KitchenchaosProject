@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -19,7 +20,11 @@ public class Player : KitchenObjectHolder
     private void Start ()
     {
         gameInput.OnInteractAction += GameInput_OnInteractAction;
+        gameInput.OnInteractOperation += GameInput_OnInteractOperation;
     }
+
+    
+
     void Update()
     {
         HandleInterection();
@@ -30,6 +35,10 @@ public class Player : KitchenObjectHolder
     private void GameInput_OnInteractAction (object sender, System.EventArgs e)
     {
         selectedCounter?.Interact(this);
+    }
+    private void GameInput_OnInteractOperation(object sender, EventArgs e)
+    {
+        selectedCounter?.InteractOperate(this);
     }
     public bool Iswalking
     {

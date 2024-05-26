@@ -39,4 +39,13 @@ public class KitchenObjectHolder : MonoBehaviour
         kitchenObject.transform.localPosition = Vector3.zero;
         this.kitchenObject = kitchenObject;
     }
+    public void CreateKitchenObject(GameObject KitchenObject){
+        KitchenObject kitchenObject = Instantiate(KitchenObject,GetHoldPoint().position,GetHoldPoint().rotation,GetHoldPoint())
+        .GetComponent<KitchenObject>();
+        SetKitchenObject(kitchenObject);
+    }
+    public void DestroyKitchenObject(){
+        Destroy(kitchenObject.gameObject);
+        ClearKitchenObject();
+    }
 }
