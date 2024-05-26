@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class CuttingCounter : BaseCounter
 {
-    [SerializeField]private CuttingRecipeListSO CuttingkitchenObjectSO;
+    [SerializeField] private CuttingRecipeListSO CuttingkitchenObjectSO;
+    private int cuttingCount = 0;
     public override void Interact(Player player)
     {
         if (player.IsHaveKitchenObject())
         {
-            if (IsHaveKitchenObject()==false)
+            if (IsHaveKitchenObject() == false)
             {
                 TransferKitchenObject(player, this);
             }
@@ -24,10 +25,11 @@ public class CuttingCounter : BaseCounter
             if (IsHaveKitchenObject())
             {
                 TransferKitchenObject(this, player);
+                cuttingCount = 0;
             }
             else
             {
-                
+
             }
         }
     }
@@ -35,9 +37,9 @@ public class CuttingCounter : BaseCounter
     {
         if (player.IsHaveKitchenObject())
         {
-            if (IsHaveKitchenObject()==false)
+            if (IsHaveKitchenObject() == false)
             {
-                
+
             }
             else
             {
@@ -49,18 +51,23 @@ public class CuttingCounter : BaseCounter
         {//玩家没有食材
             if (IsHaveKitchenObject())
             {
-                
-                KitchenObjectSO cuttingObjectSO = CuttingkitchenObjectSO.GetOutput(GetKitchenObject().GetKitchenObjectSO());
-                if (cuttingObjectSO != null){
-                    DestroyKitchenObject();
-                    CreateKitchenObject(cuttingObjectSO.kitchenObject);
+
+                if (CuttingkitchenObjectSO.TryGetCuttingRecipe(GetKitchenObject().GetKitchenObjectSO()
+                    , out CuttingRecipe CuttingRecipe))
+                {
+                    cuttingCount++;
+                    if (cuttingCount == CuttingRecipe.cuttingCountMax)
+                    {
+                        //cuttingCount = 0;
+                        DestroyKitchenObject();
+                        CreateKitchenObject(CuttingRecipe.output.kitchenObject);
+                    }
+
                 }
-                
-                
             }
             else
             {
-                
+
             }
         }
     }

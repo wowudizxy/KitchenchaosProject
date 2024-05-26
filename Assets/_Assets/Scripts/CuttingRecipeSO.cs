@@ -7,6 +7,7 @@ public class CuttingRecipe
 {
     public KitchenObjectSO input;
     public KitchenObjectSO output;
+    public int cuttingCountMax;
 }
 [CreateAssetMenu]
 public class CuttingRecipeListSO : ScriptableObject
@@ -20,6 +21,17 @@ public class CuttingRecipeListSO : ScriptableObject
             }
         }
         return null;
+    }
+    public bool TryGetCuttingRecipe(KitchenObjectSO input,out CuttingRecipe cuttingRecipe){
+        foreach (CuttingRecipe recipe in cuttingRecipeSOList)
+        {
+            if(input == recipe.input){
+                cuttingRecipe = recipe;
+                return true;
+            }
+        }
+        cuttingRecipe = null;
+        return false;
     }
 }
 
