@@ -393,7 +393,7 @@ PrefabInstance:
         type: 3}
       propertyPath: CuttingkitchenObjectSO
       value: 
-      objectReference: {fileID: 11400000, guid: 4cddf749b9eece945a68dbc3ef29c513,
+      objectReference: {fileID: 11400000, guid: 054b0741a9ba3024493a498e0d054ac3,
         type: 2}
     - target: {fileID: 3842071566256537453, guid: d6d027e7b914e434db22af9c2f577abc,
         type: 3}

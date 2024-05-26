@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CuttingCounter : BaseCounter
 {
-    [SerializeField]private KitchenObjectSO CuttingkitchenObjectSO;
+    [SerializeField]private CuttingRecipeListSO CuttingkitchenObjectSO;
     public override void Interact(Player player)
     {
         if (player.IsHaveKitchenObject())
@@ -49,8 +49,13 @@ public class CuttingCounter : BaseCounter
         {//玩家没有食材
             if (IsHaveKitchenObject())
             {
-                DestroyKitchenObject();
-                CreateKitchenObject(CuttingkitchenObjectSO.kitchenObject);
+                
+                KitchenObjectSO cuttingObjectSO = CuttingkitchenObjectSO.GetOutput(GetKitchenObject().GetKitchenObjectSO());
+                if (cuttingObjectSO != null){
+                    DestroyKitchenObject();
+                    CreateKitchenObject(cuttingObjectSO.kitchenObject);
+                }
+                
                 
             }
             else
