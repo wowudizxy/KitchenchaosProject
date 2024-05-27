@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine;
 public class CuttingCounter : BaseCounter
 {
     [SerializeField] private CuttingRecipeListSO CuttingkitchenObjectSO;
+    [SerializeField] private ProgressBarUI progressBarUI;
     private int cuttingCount = 0;
     public override void Interact(Player player)
     {
@@ -26,6 +28,7 @@ public class CuttingCounter : BaseCounter
             {
                 TransferKitchenObject(this, player);
                 cuttingCount = 0;
+                progressBarUI.Invoke("hide", 0.5f);
             }
             else
             {
@@ -56,11 +59,13 @@ public class CuttingCounter : BaseCounter
                     , out CuttingRecipe CuttingRecipe))
                 {
                     cuttingCount++;
+                    progressBarUI.UpdateProgress(cuttingCount/(float)CuttingRecipe.cuttingCountMax);
                     if (cuttingCount == CuttingRecipe.cuttingCountMax)
                     {
                         //cuttingCount = 0;
                         DestroyKitchenObject();
                         CreateKitchenObject(CuttingRecipe.output.kitchenObject);
+                        progressBarUI.hide();
                     }
 
                 }
