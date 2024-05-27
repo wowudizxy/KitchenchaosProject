@@ -7,6 +7,7 @@ public class CuttingCounter : BaseCounter
 {
     [SerializeField] private CuttingRecipeListSO CuttingkitchenObjectSO;
     [SerializeField] private ProgressBarUI progressBarUI;
+    [SerializeField] private CuttingCounterVisual cuttingCounterVisual;
     private int cuttingCount = 0;
     public override void Interact(Player player)
     {
@@ -28,7 +29,7 @@ public class CuttingCounter : BaseCounter
             {
                 TransferKitchenObject(this, player);
                 cuttingCount = 0;
-                progressBarUI.Invoke("hide", 0.5f);
+                progressBarUI.hide();
             }
             else
             {
@@ -58,14 +59,14 @@ public class CuttingCounter : BaseCounter
                 if (CuttingkitchenObjectSO.TryGetCuttingRecipe(GetKitchenObject().GetKitchenObjectSO()
                     , out CuttingRecipe CuttingRecipe))
                 {
-                    cuttingCount++;
+                    Cut();
                     progressBarUI.UpdateProgress(cuttingCount/(float)CuttingRecipe.cuttingCountMax);
                     if (cuttingCount == CuttingRecipe.cuttingCountMax)
                     {
                         //cuttingCount = 0;
                         DestroyKitchenObject();
                         CreateKitchenObject(CuttingRecipe.output.kitchenObject);
-                        progressBarUI.hide();
+                        progressBarUI.Invoke("hide", 0.5f);
                     }
 
                 }
@@ -75,5 +76,9 @@ public class CuttingCounter : BaseCounter
 
             }
         }
+    }
+    private void Cut(){
+        cuttingCount++;
+        cuttingCounterVisual.PlayCut();
     }
 }
