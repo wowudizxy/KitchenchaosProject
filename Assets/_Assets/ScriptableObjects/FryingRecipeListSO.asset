@@ -15,7 +15,7 @@ MonoBehaviour:
   fryingRecipesList:
   - input: {fileID: 11400000, guid: 086426565daf5b645b5742eaa92b7034, type: 2}
     output: {fileID: 11400000, guid: 4f40593dfd45ae74bbf4776f49c103cc, type: 2}
-    FryingTime: 3
+    FryingTime: 4
   - input: {fileID: 11400000, guid: 4f40593dfd45ae74bbf4776f49c103cc, type: 2}
     output: {fileID: 11400000, guid: 6df2444a7dc380245ad0cf720f881bea, type: 2}
-    FryingTime: 1
+    FryingTime: 3

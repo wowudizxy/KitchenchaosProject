@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,8 @@ using UnityEngine;
 public class StoveCounter : BaseCounter
 {
     [SerializeField] private FryingRecipeSO fryingRecipeSO;
+    [SerializeField] private StoveCounterVisual stoveCounterVisual;
+    [SerializeField] private ProgressBarUI progressBarUI;
     private FryingRecipe fryingRecipe;
     public enum FryingState
     {
@@ -36,7 +39,7 @@ public class StoveCounter : BaseCounter
             if (IsHaveKitchenObject())
             {
                 TransferKitchenObject(this, player);
-                state = FryingState.Idle;
+                StartIdle();
             }
             else
             {
@@ -52,6 +55,7 @@ public class StoveCounter : BaseCounter
                 break;
             case FryingState.Cooking:
                 fryingTimer += Time.deltaTime;
+                progressBarUI.UpdateProgress(fryingTimer / fryingRecipe.FryingTime);
                 if (fryingTimer >= fryingRecipe.FryingTime)
                 {
                     DestroyKitchenObject();
@@ -59,17 +63,19 @@ public class StoveCounter : BaseCounter
                     if(fryingRecipeSO.TryGetFryingRecipe(GetKitchenObject().GetKitchenObjectSO(),out FryingRecipe newFryingRecipe))
                     {
                         StartBurning(newFryingRecipe);
-                        
+                    }else{
+                        StartIdle();
                     }
                 }
                 break;
             case FryingState.Burning:
                 fryingTimer += Time.deltaTime;
+                progressBarUI.UpdateProgress(fryingTimer / fryingRecipe.FryingTime);
                 if (fryingTimer >= fryingRecipe.FryingTime)
                 {
                     DestroyKitchenObject();
                     CreateKitchenObject(fryingRecipe.output.kitchenObject);
-                    state = FryingState.Idle;
+                    StartIdle();
                 }
                 break;
 
@@ -77,15 +83,31 @@ public class StoveCounter : BaseCounter
                 break;
         }
     }
+    public void StartIdle(){
+        state = FryingState.Idle;
+        stoveCounterVisual.HideStoveSpecialEffect();
+        progressBarUI.hide();
+
+    }
+
     public void StartCooking(FryingRecipe fryingRecipe)
     {
+        fryingTimer = 0;
         this.fryingRecipe = fryingRecipe;
         state = FryingState.Cooking;
-        fryingTimer = 0;
+        stoveCounterVisual.ShowStoveSpecialEffect();
+        
     }
     public void StartBurning(FryingRecipe fryingRecipe){
+        if(fryingRecipe == null){
+            Debug.LogWarning("没有找到对应的recipe");
+            state = FryingState.Idle;
+            return;
+        }
+        fryingTimer = 0;
         this.fryingRecipe = fryingRecipe;
         state = FryingState.Burning;
-        fryingTimer = 0;
+        stoveCounterVisual.ShowStoveSpecialEffect();
+        
     }
 }
